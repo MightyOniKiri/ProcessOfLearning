@@ -43,7 +43,7 @@ dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
 # 统计类别名称
 class_names = image_datasets['train'].classes
 
-device = torch.accelerate.current_accelerator().type if torch.accelerator.is_available() else "cpu"
+device = torch.accelerator.current_accelerator().type if torch.accelerator.is_available() else "cpu"
 
 
 

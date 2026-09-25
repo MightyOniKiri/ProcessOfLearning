@@ -64,9 +64,7 @@ python load_data.py
 
 程序会输出当前使用的计算设备，并显示一个批次的训练图片和对应类别。
 
-## 后续计划
+## 学习点
 
-- 加载在 ImageNet 上预训练的模型
-- 替换并训练分类层
-- 比较微调整个网络与固定特征提取器的效果
-- 在验证集上评估模型准确率
+- 在epoch时记录输出epoch，方便查看训练进度
+- time.time()记录训练时间，最后print(f'Training complete in {time_elapsed // 60:.0f}m {time_elapsed % 60:.0f}s')
