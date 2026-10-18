@@ -29,14 +29,15 @@ data_transforms = {
     ])
 }
 
-data_dir = './data/hymenoptera_data'
+# 根据当前文件的位置寻找数据，不受运行目录影响
+data_dir = os.path.join(os.path.dirname(__file__), 'data', 'hymenoptera_data')
 # read all images and save them to image_datasets
 image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
                                           data_transforms[x])
                   for x in ['train', 'val']}
 # create dataloaders 可以理解为一个批量数据加载器
 dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size = 4,
-                                              shuffle = True, num_workers = 4)
+                                              shuffle = (x == 'train'), drop_last=(x == 'train'), num_workers = 4)
                   for x in ['train', 'val']}
 # 统计每个数据集的大小
 dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
