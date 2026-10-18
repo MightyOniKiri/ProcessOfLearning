@@ -1,7 +1,6 @@
 import torch
 
 def test(test_loader, model, loss_fn, device):
-    num_batches = len(test_loader)
     # 调整模型为评估格式
     model.eval()  
     
@@ -15,11 +14,12 @@ def test(test_loader, model, loss_fn, device):
             images, labels = images.to(device), labels.to(device)
             
             pred_labels = model(images)
-            total_loss += loss_fn(pred_labels, labels).item()
+            total_loss += loss_fn(pred_labels, labels).item() * labels.size(0)
             correct_pred += (pred_labels.argmax(1) == labels).sum().item()
             total_samples += labels.size(0)
             
-    total_loss /= num_batches
+    total_loss /= total_samples
     accuracy = correct_pred / total_samples
     
     print(f"Test Error: \n Accuracy: {(100*accuracy):>0.1f}%, Avg loss: {total_loss:>8f} \n")
+    return {"loss": total_loss, "accuracy": accuracy}

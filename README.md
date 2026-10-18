@@ -6,7 +6,7 @@
 
 | 项目 | 说明 |
 | --- | --- |
-| [LearnTheBasics](./LearnTheBasics) | 使用 PyTorch 和 FashionMNIST 学习神经网络的训练与测试流程 |
+| [FashionClassification](./FashionClassification) | 使用 PyTorch 和 FashionMNIST 学习神经网络的训练与测试流程 |
 | [ImageClassification](./ImageClassification) | 学习迁移学习中的图像预处理、数据增强、数据加载与样本可视化 |
 
 ## 说明
