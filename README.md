@@ -6,7 +6,7 @@
 
 | 项目 | 说明 |
 | --- | --- |
-| [FashionClassification](./FashionClassification) | 基于 PyTorch 入门教程，当前使用 EMNIST Balanced 进行 47 类手写字符分类，包含训练、测试和可视化 |
+| [SimpleGrayClassification](./SimpleGrayClassification) | 基于 PyTorch 入门教程，当前使用 EMNIST Balanced 进行 47 类手写字符分类，包含训练、测试和可视化 |
 | [ImageClassification](./ImageClassification) | 学习迁移学习中的图像预处理、数据增强、数据加载与样本可视化 |
 
 ## 说明

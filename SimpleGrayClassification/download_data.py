@@ -1,4 +1,5 @@
 import torch
+from pathlib import Path
 import torch.nn as nn
 import torchvision.datasets as datasets
 from torch.utils.data import DataLoader
@@ -10,15 +11,16 @@ from torchvision.transforms import v2
 # In this code, we use the EMNIST dataset from torchvision.datasets. 
 
 # Download the trining and test datasets
+data_dir = Path(__file__).resolve().parent / "data"
 train_dataset = datasets.EMNIST(
-    root = "./data",
+    root = data_dir,
     split = "balanced",
     train = True,
     download = True,
     transform=v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)]),
 )
 test_dataset = datasets.EMNIST(
-    root = "./data",
+    root = data_dir,
     split = "balanced",
     train = False,
     download = True,
