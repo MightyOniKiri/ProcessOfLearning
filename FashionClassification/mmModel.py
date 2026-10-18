@@ -8,7 +8,8 @@ class NeuralNetwork(nn.Module):
         
         self.fc1 = nn.Linear(28*28, 512)
         self.fc2 = nn.Linear(512, 256)
-        self.fc3 = nn.Linear(256, 10)
+        # EMNIST Balanced 数据集有 47 个类别
+        self.fc3 = nn.Linear(256, 47)
         
         self.relu = nn.ReLU()
         

@@ -7,17 +7,19 @@ from torch.utils.data import DataLoader
 # v2是新版API，支持更多类型的输入，例如图像、目标检测中的边界框以及分割任务中的掩码，并能对相关数据进行协调变换
 from torchvision.transforms import v2
 
-# In this code, we use the FashionMNIST dataset from torchvision.datasets. 
+# In this code, we use the EMNIST dataset from torchvision.datasets. 
 
 # Download the trining and test datasets
-train_dataset = datasets.FashionMNIST(
+train_dataset = datasets.EMNIST(
     root = "./data",
+    split = "balanced",
     train = True,
     download = True,
     transform=v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)]),
 )
-test_dataset = datasets.FashionMNIST(
+test_dataset = datasets.EMNIST(
     root = "./data",
+    split = "balanced",
     train = False,
     download = True,
     transform=v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)]),

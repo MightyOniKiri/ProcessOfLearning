@@ -1,8 +1,38 @@
 # FashionClassification
 
+> 项目参考来源：PyTorch 官方 [Learn the Basics](https://docs.pytorch.org/tutorials/beginner/basics/intro.html) 系列教程，主要对应 [Quickstart](https://docs.pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html) 中的 FashionMNIST 分类示例。本项目在学习示例的基础上拆分代码模块、调整网络层宽度，并增加训练指标记录、数据可视化及测试样例保存功能。目前已将数据集切换为 EMNIST Balanced，输出层相应调整为 47 类。
+
 一个用于学习 PyTorch 基础流程的小项目。
 
-项目使用 FashionMNIST 数据集训练一个全连接神经网络，包含数据下载、模型定义、训练和测试等基本步骤。
+项目目前使用 EMNIST Balanced 数据集训练一个手写字符分类的全连接神经网络，包含数据下载、模型定义、训练、测试和可视化等步骤。文件夹保留 `FashionClassification` 名称。
+
+## 当前数据集：EMNIST Balanced
+
+数据集来源：[NIST 官方 EMNIST 介绍](https://www.nist.gov/itl/products-and-services/emnist-dataset)。
+
+- 输入为 28×28 的单通道灰度图片，包含手写数字和字母。
+- 当前使用 `split="balanced"`，共 47 个类别，标签索引为 0～46。
+- 训练集通过 `train=True` 加载，测试集通过 `train=False` 加载；两者均使用 `split="balanced"`。
+- `split` 在这里选择 EMNIST 的版本，`train` 才用于选择该版本的训练集或测试集。
+- 图像经过 `v2.ToImage()` 和 `v2.ToDtype(torch.float32, scale=True)` 转换为浮点张量，像素值范围为 0～1。
+- 可视化中的字符名称取自数据集的 `classes` 属性。
+
+加载配置示例（与 `download_data.py` 一致）：
+
+```python
+train_dataset = datasets.EMNIST(
+    root="./data",
+    split="balanced",
+    train=True,
+    download=True,
+    transform=v2.Compose([
+        v2.ToImage(),
+        v2.ToDtype(torch.float32, scale=True),
+    ]),
+)
+```
+
+测试集使用相同配置，但将 `train` 改成 `False`。`root="./data"` 相对于运行命令时所在的目录，因此建议按下面的方式进入项目目录后运行。
 
 ## 项目结构
 
@@ -41,7 +71,9 @@ cd FashionClassification
 python main.py
 ```
 
-程序会自动下载 FashionMNIST 数据集，然后进行模型训练和测试。
+程序会自动下载 EMNIST 数据集并加载 Balanced 版本，然后进行模型训练和测试。
+
+从原来的 FashionMNIST 切换后，需要重新运行 `python main.py` 训练模型。旧的 10 类 `model.pth` 无法直接加载到当前 47 类网络；如需保留旧参数，请先备份。`python predict.py` 应使用当前 EMNIST 网络训练得到的参数。
 
 ## 模型结构
 
@@ -52,9 +84,9 @@ python main.py
 3. ReLU 激活函数
 4. 全连接层：512 → 256
 5. ReLU 激活函数
-6. 输出层：256 → 10
+6. 输出层：256 → 47
 
-输出的 10 个类别对应 FashionMNIST 的十种服装分类。
+输出的 47 个分数（logits）对应 EMNIST Balanced 的 47 个字符类别。训练时将 logits 直接传给 `CrossEntropyLoss`，预测展示时再用 softmax 计算各类别概率。
 
 ## 可视化与测试样例保存
 
@@ -75,7 +107,7 @@ python main.py
 
 ## 在原有代码基础上增加了什么
 
-原来的项目已经可以训练、测试并保存模型参数，但训练和测试指标只打印在终端，没有保存样例图片、预测记录或训练曲线。这次保留原来的网络结构 `784 → 512 → 256 → 10`，补充了下面的功能。
+原来的 FashionMNIST 项目已经可以训练、测试并保存模型参数，但训练和测试指标只打印在终端，没有保存样例图片、预测记录或训练曲线。后来增加了下面的记录和可视化功能；当前又切换到 EMNIST Balanced，网络结构相应更新为 `784 → 512 → 256 → 47`。
 
 ### 1. train.py：统计并返回整轮训练指标
 
