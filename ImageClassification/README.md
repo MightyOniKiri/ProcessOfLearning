@@ -138,7 +138,7 @@ model.train()
 
 比较“微调整个 ResNet18”和“冻结主干参数及 BatchNorm 统计量、只训练分类层”在当前二分类任务上的表现。
 
-本报告依据 `outputs/finetune/`、`outputs/frozen/` 中的六张图片，以及两组原始记录：[微调组 CSV](outputs/finetune/training_history.csv)、[冻结组 CSV](outputs/frozen/training_history.csv)。两组均记录了完整的 25 轮；表中数值由 CSV 计算，不再使用旧版图片的读图估计。当前微调组图片与 CSV 已替换为新一轮结果，本报告以当前归档为准。
+本报告依据 `outputs/finetune/`、`outputs/frozen/` 中的六张图片，以及两组原始记录：微调组 CSV、冻结组 CSV。两组均记录了完整的 25 轮；表中数值由 CSV 计算，不再使用旧版图片的读图估计。当前微调组图片与 CSV 已替换为新一轮结果，本报告以当前归档为准。
 
 上表列出的是当前代码设置。两组没有分别保存完整配置和环境快照，因此不能逐项确认历史运行的软件、硬件和随机设置完全相同。
 
