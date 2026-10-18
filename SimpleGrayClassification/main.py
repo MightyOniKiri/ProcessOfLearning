@@ -23,7 +23,7 @@ def main():
     loss_fn = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=1e-3)
     
-    epochs = 10
+    epochs = 20
     history = []
     for turn in range(epochs):
         print(f"Epoch {turn+1}\n-------------------------------")
