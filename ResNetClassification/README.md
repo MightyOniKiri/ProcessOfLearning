@@ -1,4 +1,4 @@
-# ImageClassification：ResNet18 迁移学习练习
+# ResNetClassification：ResNet18 迁移学习练习
 
 使用 ImageNet 预训练的 ResNet18，对蚂蚁（ants）和蜜蜂（bees）图片进行二分类。本项目记录从教程学习、修改代码，到比较全模型微调与冻结主干的过程。
 
@@ -19,7 +19,7 @@
 ## 文件与数据
 
 ```text
-ImageClassification/
+ResNetClassification/
 ├── main.py                    # 创建模型、设置优化器、启动训练
 ├── load_data.py               # 数据预处理、加载与图片显示
 ├── train_model.py             # 训练、验证、记录与预测展示
@@ -63,13 +63,13 @@ python -c "import sys, torch, torchvision, numpy, matplotlib; print(sys.version)
 在仓库根目录运行：
 
 ```bash
-python ImageClassification/main.py
+python ResNetClassification/main.py
 ```
 
 首次运行需要联网下载 ResNet18 预训练权重。程序自动选择可用的计算设备，否则使用 CPU。只查看一批训练图片时运行：
 
 ```bash
-python ImageClassification/load_data.py
+python ResNetClassification/load_data.py
 ```
 
 当前代码处于**全模型微调**状态（主干参数未冻结，训练阶段使用 `model.train()`）。主要设置为：
@@ -120,7 +120,7 @@ model.train()
 
 验证阶段仍保持 `model.eval()`。两处需要一起切换。
 
-程序将以下文件保存到 `ImageClassification/`，**不会自动写入 `outputs/` 的分组目录**：
+程序将以下文件保存到 `ResNetClassification/`，**不会自动写入 `outputs/` 的分组目录**：
 
 | 文件 | 内容 |
 | --- | --- |

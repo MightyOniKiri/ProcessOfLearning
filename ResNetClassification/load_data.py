@@ -37,7 +37,7 @@ image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x),
                   for x in ['train', 'val']}
 # create dataloaders 可以理解为一个批量数据加载器
 dataloaders = {x: torch.utils.data.DataLoader(image_datasets[x], batch_size = 4,
-                                              shuffle = (x == 'train'), drop_last=(x == 'train'), num_workers = 4)
+                                              shuffle = (x == 'train'), drop_last=(x == 'train'))
                   for x in ['train', 'val']}
 # 统计每个数据集的大小
 dataset_sizes = {x: len(image_datasets[x]) for x in ['train', 'val']}
